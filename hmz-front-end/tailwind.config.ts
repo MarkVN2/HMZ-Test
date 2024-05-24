@@ -11,6 +11,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily:{
+        FiraSans:['Fira Sans', 'sans-serif']
+      }
     },
   },
   plugins: [],
