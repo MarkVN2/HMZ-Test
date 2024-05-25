@@ -1,4 +1,7 @@
 import { Table } from "flowbite-react";
+import EditIcon from "../svg_icons/edit_icon";
+import { useState } from "react";
+import UserEditButton from "../user_edit_button";
 
 interface UserTableRowProps {
     id: number;
@@ -9,14 +12,26 @@ interface UserTableRowProps {
 }
 
 const UsersTableRow = ({ id,email,first_name,last_name,avatar } : UserTableRowProps) => {
+    const [isEditing, setIsEditing] = useState(false);
+
     return(
         <Table.Row className="border-b">
-            <Table.Cell></Table.Cell>
-            <Table.Cell>{id}</Table.Cell>
-            <Table.Cell>{email}</Table.Cell>
-            <Table.Cell>{first_name}</Table.Cell>
-            <Table.Cell>{last_name}</Table.Cell>
-            <Table.Cell>{avatar}</Table.Cell>
+            <UserEditButton id={id} />
+            <Table.Cell>
+                {id}
+            </Table.Cell>
+            <Table.Cell>
+                {avatar}
+            </Table.Cell>
+            <Table.Cell>
+                {email}
+            </Table.Cell>
+            <Table.Cell>
+                {first_name}
+            </Table.Cell>
+            <Table.Cell>
+                {last_name}
+            </Table.Cell>
         </Table.Row>
     )
 }
