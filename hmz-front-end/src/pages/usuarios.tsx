@@ -5,67 +5,47 @@ import UserAddButton from '@/components/user_add_button';
 import UsersTableRow from '@/components/users_table_row';
 import instance from '@/scripts/requests/instance';
 import { Table } from 'flowbite-react';
-import { useState } from 'react';
+import { use, useEffect, useState } from 'react';
 
 export default function Usuarios() {
     const [page, setPage] = useState(1);
     const [data, setData] = useState([]);
-    
-    type User = {
-        id: number;
-        avatar: string;
-        email: string;
-        first_name: string;
-        last_name: string;
-      };
-
-    const dataTest : User[] =[
-    {
-      "id": 1,
-      "avatar": "avatar1",
-      "email": "email1@example.com",
-      "first_name": "FirstName1",
-      "last_name": "LastName1"
-    },
-    {
-      "id": 2,
-      "avatar": "avatar2",
-      "email": "email2@example.com",
-      "first_name": "FirstName2",
-      "last_name": "LastName2"
-    },
-    {
-      "id": 3,
-      "avatar": "avatar3",
-      "email": "email3@example.com",
-      "first_name": "FirstName3",
-      "last_name": "LastName3"
-    },
-    ]
+    const [maxPages, setMaxPages] = useState(0);
+    const [perPage, setPerPage] = useState(5)
+    const [totalInfo, setTotalInfo] = useState(0)
 
     const getData = async () => {
-      const response = await instance.get(`/users?page=${page}`);
-      setData(response.data);
+      const response = await instance.get(`/users?page=${page}&per_page=${perPage}`);
+      setTotalInfo(response.data.total)
+      setMaxPages(response.data.total_pages)
+      setData(response.data.data);
     };
 
     const handlePrevious = () => {
-    if (page > 1) {
+    if (page > 0) {
         setPage(page - 1);
-        getData()
     }
     };
 
     const handleNext = () => {
+      if (page < maxPages)
       setPage(page + 1);
-      getData()
     };
+    useEffect(() => {
+    getData()
+    },[page]);
+    useEffect(() => {
+      setPage(1)
+      getData()
+      },[perPage]);
+      
     return(
     <div className='h-screen bg-[#b1b1b1]'>
         <TopBar />
         <div className='grid grid-flow-co'>
           <Sidebar />
-          <div className='ml-96  h-[calc(100vh-3.25rem)] mt-[3.25rem] bg-white p-5 border-4 border-solid border-[#b1b1b1] grow flex grid-flow-col '>
-               <div className='place-content-baseline'>
+          <div className='ml-96  max-md:ml-0 max-md:h-full min-h-[calc(100vh-3.25rem)]  mt-[3.25rem] bg-white p-5 border-4 border-solid border-[#b1b1b1] grow flex grid-flow-col '>
+               <div className=' place-content-baseline'>
                 <div className='grid grid-flow-col place'>
                     <p className='text-[#646464] font-FiraSans m-9'>USUÁRIOS</p>
                     <UserAddButton />
@@ -73,7 +53,7 @@ export default function Usuarios() {
                 <div >
                 <Table className="bg-[#f5f5f5] text-black ml-11">
                     <Table.Head className='bg-[#f5f5f5] text-center text-black font-FiraSans  border-b'>
-                        <Table.HeadCell ></Table.HeadCell>
+                        <Table.HeadCell></Table.HeadCell>
                         <Table.HeadCell>ID</Table.HeadCell>
                         <Table.HeadCell>Avatar</Table.HeadCell>
                         <Table.HeadCell>Email</Table.HeadCell>
@@ -81,25 +61,45 @@ export default function Usuarios() {
                         <Table.HeadCell>Sobrenome</Table.HeadCell>
                     </Table.Head>
                     <Table.Body className='px-6 py-4'>
-                        {dataTest.map((user, index) => (
-                                <UsersTableRow  
-                                    key={index}
-                                    id={user.id}
-                                    avatar={user.avatar}
-                                    email={user.email}
-                                    first_name={user.first_name}  
-                                    last_name={user.last_name}
-                                />
-                            ))}
+                        {data.map((user: {id: number, avatar : string,email: string,first_name:string,last_name: string}, index:number) => {
+                          return (
+                            <UsersTableRow  
+                            key={index}
+                            id={user.id}
+                            avatar={user.avatar}
+                            email={user.email}
+                            first_name={user.first_name}  
+                            last_name={user.last_name}
+                            />
+                          )
+                        })}
                     </Table.Body>
                 </Table>
                 </div>
                 <div className="flex justify-center space-x-2">
-                    <button onClick={handlePrevious} className="btn btn-primary">Previous</button>
-                    <button onClick={() => setPage(1)} className="btn btn-outline">1</button>
-                    <button onClick={() => setPage(2)} className="btn btn-outline">2</button>
-                    <button onClick={() => setPage(3)} className="btn btn-outline">3</button>
-                    <button onClick={handleNext} className="btn btn-primary">Next</button>
+                    {/*
+                     {Array.from({ length: maxPages }, (_, i) => (
+                        <button onClick={() => setPage(i + 1)} className={`font-FiraSans font-bold ${page == i+1? 'bg-gray-500': 'bg-red-500'}`}>{i + 1}</button>
+                    ))} 
+                    */}
+                    <div className='grid grid-flow-col gap-6 '>
+                      <p>Linhas por página 
+                      <select 
+                          className="font-FiraSans border-none"
+                          value={perPage}
+                          onChange={(e) => setPerPage(Number(e.target.value) )}
+                      >
+                          <option value="5">5</option>
+                          <option value="10">10</option>
+                          <option value="15">15</option>
+                      </select>
+                      </p>
+                      <p className='mt-1'>1-{perPage} de {totalInfo}</p>
+                      <div className='grid grid-flow-col gap-2'>
+                        <button onClick={handlePrevious}  className="font-FiraSans ">⟨ </button>
+                        <button onClick={handleNext} className='font-FiraSans '>⟩</button>
+                      </div>
+                    </div>
                 </div>
               </div> 
           </div>

@@ -4,7 +4,7 @@ import SidebarItem from '../sidebar_item';
 const Sidebar = () => {
   return (
     <div 
-      className={` w-96 bg-[#f5f5f5] h-screen fixed`} 
+      className={` w-96 bg-[#f5f5f5] max-md:hidden h-screen fixed`} 
     >
       <div>
         <ul>

@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Axios configuration
 const axiosConfig = {
-  baseURL: '12',
+  baseURL: process.env.NEXT_PUBLIC_API_IP,
   timeout: 30000,
 };
 

@@ -2,6 +2,7 @@ import { Table } from "flowbite-react";
 import EditIcon from "../svg_icons/edit_icon";
 import { useState } from "react";
 import UserEditButton from "../user_edit_button";
+import Image from "next/image";
 
 interface UserTableRowProps {
     id: number;
@@ -21,7 +22,12 @@ const UsersTableRow = ({ id,email,first_name,last_name,avatar } : UserTableRowPr
                 {id}
             </Table.Cell>
             <Table.Cell>
-                {avatar}
+                <Image 
+                src={avatar} 
+                height={32} 
+                width={32} 
+                alt="User Avatar" 
+                />
             </Table.Cell>
             <Table.Cell>
                 {email}

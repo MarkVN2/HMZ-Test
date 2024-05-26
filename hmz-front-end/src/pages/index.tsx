@@ -1,9 +1,12 @@
 import '@/app/globals.css'
 import instance from '@/scripts/requests/instance';
+import { failureAlert, successAlert } from '@/scripts/utils/shared';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 export default function Index({amogus}:{amogus:number[]}) {
+const router = useRouter();
 const [user, setUser] = useState<{username: string, password: string}>({
     username: '',
     password: ''
@@ -11,14 +14,28 @@ const [user, setUser] = useState<{username: string, password: string}>({
 
 const handleSubmit = (e: React.FormEvent) =>{
     e.preventDefault();
-
-    instance.post('/login', user)
+    // IF USING DUMMY API 
+    // LOG IN USING THIS CREDENTIALS:  
+    // eve.holt@reqres.in
+    // cityslicka
+    instance.post('/login',{
+        username: user.username,
+        email: user.username,
+        password: user.password  
+        }).then((response) => {
+            console.log(response.status)
+            if (response.status === 200){
+            successAlert('Logado com sucesso!');
+            router.push('/usuarios')
+            }
+        }).catch((error) => {
+        failureAlert('Erro ao logar!' );
+        })
 }
 const handleChange = (e :any) =>{
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
 }
-
 
   return (
    <main className='flex md:flex-row grow flex-col h-screen'>
@@ -44,20 +61,20 @@ const handleChange = (e :any) =>{
             </div>
             <form onSubmit={handleSubmit}>
                 <div className='grid'>
-                    <input id="username" name="username" type='text' placeholder='USERNAME' className='m-5 p-2 font-FiraSans' required value={user.username} onChange={handleChange}/>
+                    <input id="username" name="username" type='text' placeholder='USUÁRIO' className='m-5 p-2 font-FiraSans border-none' required value={user.username} onChange={handleChange}/>
                 </div>
                 <div className='grid' >
-                    <input id="password1" name="password" type='password' placeholder='PASSWORD' className='m-5 p-2 font-FiraSans'  required value={user.password} onChange={handleChange}/>
+                    <input id="password" name="password" type='password' placeholder='SENHA' className='m-5 p-2 font-FiraSans border-none'  required value={user.password} onChange={handleChange}/>
                 </div>
                 <div className='grid place-content-center'>
-                    <button type="submit" className='m-5 rounded-xl bg-white text-[#b1b1b1] p-3 px-12 hover:scale-110 transition-all font-FiraSans'>
+                    <button type="submit" className='m-5 rounded-xl bg-white text-[#b1b1b1] p-3 px-12 hover:scale-110 hover:bg-blue-500 hover:text-black transition-all  font-FiraSans'>
                         LOGAR 
                     </button>
                 </div>
             </form>
             <div className='flex flex-row place-content-evenly'>
-                <a className='m-2  text-[#b1b1b1] p-10   hover:underline cursor-pointer font-FiraSans' >ESQUECI MINHA SENHA</a>
-                <a className=' m-2  text-[#b1b1b1] p-10  hover:underline cursor-pointer font-FiraSans' >CADASTRE-SE</a>
+                <a className='m-2  text-[#b1b1b1] p-10   hover:underline  hover:text-blue-500 cursor-pointer font-FiraSans' >ESQUECI MINHA SENHA</a>
+                <a className=' m-2  text-[#b1b1b1] p-10  hover:underline hover:text-blue-500 cursor-pointer font-FiraSans' >CADASTRE-SE</a>
             </div>
         </div>
     </div>    
