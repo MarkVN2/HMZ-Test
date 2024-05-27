@@ -38,6 +38,12 @@ const UserAddButton = ({className = 'bg-[#f5f5f5] font-FiraSans size-fit ml-[65%
             if (response.status === 201){
             successAlert('Usuário adicionado com sucesso!')
             closeModal()
+            
+            if (window.location.pathname === '/usuarios'){
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
+            };
             }
         }).catch((error) => {
             failureAlert('Erro ao adicionar usuário!')

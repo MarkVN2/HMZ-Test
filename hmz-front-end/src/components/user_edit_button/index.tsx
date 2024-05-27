@@ -42,6 +42,9 @@ const UserEditButton = ({id}:{id:number}) => {
             console.log(response.status)
             successAlert('Usuário editado com sucesso!')
             closeModal()
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
         }).catch((error) => {
             console.log(error)
         });
