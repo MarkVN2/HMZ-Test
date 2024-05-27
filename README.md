@@ -47,6 +47,7 @@ O back-end do projeto utiliza-se de MySQL e um arquivo para recriar o banco est�
 
 Antes de executar o projeto certifique-se de atualizar o banco de dados utilizando o seguinte comando
 ```
+dotnet tool install --global dotnet-ef
 dotnet ef database update
 ```
 
@@ -64,9 +65,9 @@ dotnet build
 dotnet run
 ```
 
-A API estará rodando em [https://localhost:7100](https://localhost:7100)
+A API estará rodando em [http://localhost:5107](https://localhost:5107)
 
-Se querer ver a documentação da API navegue para [https://localhost:7100/swagger](https://localhost:7100/swagger)
+Se querer ver a documentação da API navegue para [http://localhost:5107/swagger](http://localhost:5107/swagger)
 
 ## Utilizando o Front-end
 ### Requisitos
@@ -92,7 +93,8 @@ npm install
 Não se esqueça de configurar um arquivo .env assim como o exemplo `.env.example`
 
 ```env
-NEXT_PUBLIC_API_IP = 'https://localhost:7100'
+# URL da API
+NEXT_PUBLIC_API_IP = 'http://localhost:5107' 
 ```
 
 3. Então inicie o servidor de desenvolvimento:
