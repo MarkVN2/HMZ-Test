@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Markos\\source\\repos\\hmzBackEnd\\hmzBackEnd\\hmzBackEnd.csproj": {}
+    "F:\\TrabalhosTrabalhos\\hmz_test\\HMZ-Test\\hmzBackEnd\\hmzBackEnd\\hmzBackEnd.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Markos\\source\\repos\\hmzBackEnd\\hmzBackEnd\\hmzBackEnd.csproj": {
+    "F:\\TrabalhosTrabalhos\\hmz_test\\HMZ-Test\\hmzBackEnd\\hmzBackEnd\\hmzBackEnd.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Markos\\source\\repos\\hmzBackEnd\\hmzBackEnd\\hmzBackEnd.csproj",
+        "projectUniqueName": "F:\\TrabalhosTrabalhos\\hmz_test\\HMZ-Test\\hmzBackEnd\\hmzBackEnd\\hmzBackEnd.csproj",
         "projectName": "hmzBackEnd",
-        "projectPath": "C:\\Users\\Markos\\source\\repos\\hmzBackEnd\\hmzBackEnd\\hmzBackEnd.csproj",
+        "projectPath": "F:\\TrabalhosTrabalhos\\hmz_test\\HMZ-Test\\hmzBackEnd\\hmzBackEnd\\hmzBackEnd.csproj",
         "packagesPath": "C:\\Users\\Markos\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Markos\\source\\repos\\hmzBackEnd\\hmzBackEnd\\obj\\",
+        "outputPath": "F:\\TrabalhosTrabalhos\\hmz_test\\HMZ-Test\\hmzBackEnd\\hmzBackEnd\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Markos\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -45,6 +45,28 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[12.0.1, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.4, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[8.0.2, )"
+            },
+            "MySql.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.2, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.4.0, )"

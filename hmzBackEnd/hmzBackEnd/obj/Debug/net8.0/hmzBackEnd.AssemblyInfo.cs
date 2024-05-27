@@ -11,10 +11,11 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("f408441e-a478-428f-b063-1d264c59ce25")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("hmzBackEnd")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e5f64767ece9d847b363c7c934c0d5431ea0dfca")]
 [assembly: System.Reflection.AssemblyProductAttribute("hmzBackEnd")]
 [assembly: System.Reflection.AssemblyTitleAttribute("hmzBackEnd")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
