@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("hmzBackEnd")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e5f64767ece9d847b363c7c934c0d5431ea0dfca")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ec054c8a387e1d4b096a0627e9d1939540829cdd")]
 [assembly: System.Reflection.AssemblyProductAttribute("hmzBackEnd")]
 [assembly: System.Reflection.AssemblyTitleAttribute("hmzBackEnd")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
