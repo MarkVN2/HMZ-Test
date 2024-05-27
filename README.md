@@ -25,7 +25,7 @@ git clone https://github.com/MarkVN2/HMZ-Test/tree/main/hmzBackEnd
 ```
 2. Navegue até o diretorio do projeto
 ```
-cd hmzBackEnd
+cd hmzBackEnd/hmzBackEnd
 ```
 3. Atualize "ConnectionStrings" no arquivo `appsetting.json`
 ```json
