@@ -5,7 +5,7 @@ import UserAddButton from '@/components/user_add_button';
 import UsersTableRow from '@/components/users_table_row';
 import instance from '@/scripts/requests/instance';
 import { Table } from 'flowbite-react';
-import { use, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Usuarios() {
     const [page, setPage] = useState(1);
@@ -48,7 +48,7 @@ export default function Usuarios() {
         <TopBar />
         <div className='grid grid-flow-co'>
           <Sidebar />
-          <div className='ml-96  max-md:ml-0 max-md:h-full min-h-[calc(100vh-3.25rem)]  mt-[3.25rem] bg-white p-5 border-4 border-solid border-[#b1b1b1] grow flex grid-flow-col '>
+          <div className='ml-96  max-md:ml-0 max-md:h-full min-h-[calc(100vh-3.25rem)] place-content-center mt-[3.25rem] bg-white p-5 border-4 border-solid border-[#b1b1b1] grow flex grid-flow-col '>
                <div className=' place-content-baseline'>
                 <div className='grid grid-flow-col place'>
                     <p className='text-[#646464] font-FiraSans m-9'>USUÁRIOS</p>

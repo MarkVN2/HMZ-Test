@@ -13,7 +13,7 @@ const UserEditButton = ({id}:{id:number}) => {
         firstName: '',
         lastName: ''
     });
-
+    
     const getData = async () => {
         const response = await instance.get(`/users/${id}`);
         console.log(response)
@@ -27,6 +27,7 @@ const UserEditButton = ({id}:{id:number}) => {
          console.log(response.status)
          successAlert('Usuário excluído com sucesso!')
          closeModal()
+        window.location.reload();
      }).catch((error) => {
          console.log(error)
      });
@@ -42,9 +43,9 @@ const UserEditButton = ({id}:{id:number}) => {
             console.log(response.status)
             successAlert('Usuário editado com sucesso!')
             closeModal()
-            setTimeout(() => {
+           
                 window.location.reload();
-            }, 1000);
+          
         }).catch((error) => {
             console.log(error)
         });
@@ -54,13 +55,10 @@ const UserEditButton = ({id}:{id:number}) => {
         setUser({ ...user, [name]: value });
     }
 
-    useEffect(() => {
-        getData()
-    },[]);
     return(
-        <Table.Cell className="cursor-pointer" onClick={()=>setModalIsOpen(true)}>
+        <Table.Cell className="cursor-pointer" onClick={()=>{setModalIsOpen(true);  getData()}}>
             <EditIcon/>
-            <Modal show={modalIsOpen} onClose={closeModal}  className="bg-black bg-opacity-30  w-50 " dismissible>
+            <Modal show={modalIsOpen} onClose={closeModal}  className="bg-black bg-opacity-30  w-50 " onClick={(e: React.FormEvent) =>{if (e && e.stopPropagation) e.stopPropagation()}} dismissible>
                 <p className='text-[#8b8b8b] font-FiraSans mt-5 ml-5'>EDITAR USÚARIO {id}</p>
                 <Modal.Body>
                     <div className='grid grid-flow-col'>
