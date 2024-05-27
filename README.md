@@ -1,6 +1,6 @@
 
 # HMZ-Test
-A seguir temos instruções de como rodar cada parte do projeto individualmente, alternativamente você pode baixar o proejeto inteiro e só seguir os passos apartir da clonagem
+A seguir temos instruções de como rodar cada parte do projeto individualmente, alternativamente você pode baixar o projeto inteiro e só seguir os passos apartir da clonagem
 link para clonar o projeto utilizando do git
 ```
 git clone https://github.com/MarkVN2/HMZ-Test
