@@ -16,26 +16,30 @@ export default function Usuarios() {
 
     const getData = async () => {
       const response = await instance.get(`/users?page=${page}&per_page=${perPage}`);
+      console.log(response)
       setTotalInfo(response.data.total)
-      setMaxPages(response.data.total_pages)
+      setMaxPages(response.data.totalPages)
       setData(response.data.data);
     };
 
     const handlePrevious = () => {
-    if (page > 0) {
+    if (page > 1) {
         setPage(page - 1);
+        console.log(page)
     }
     };
 
     const handleNext = () => {
       if (page < maxPages)
       setPage(page + 1);
+      console.log(page)
     };
     useEffect(() => {
     getData()
     },[page]);
     useEffect(() => {
       setPage(1)
+      console.log(page)
       getData()
       },[perPage]);
       
@@ -48,7 +52,7 @@ export default function Usuarios() {
                <div className=' place-content-baseline'>
                 <div className='grid grid-flow-col place'>
                     <p className='text-[#646464] font-FiraSans m-9'>USUÁRIOS</p>
-                    <UserAddButton />
+                    <UserAddButton/>
                 </div>
                 <div >
                 <Table className="bg-[#f5f5f5] text-black ml-11">
@@ -61,15 +65,15 @@ export default function Usuarios() {
                         <Table.HeadCell>Sobrenome</Table.HeadCell>
                     </Table.Head>
                     <Table.Body className='px-6 py-4'>
-                        {data.map((user: {id: number, avatar : string,email: string,first_name:string,last_name: string}, index:number) => {
+                        {data.map((user: {id: number, avatar : string,email: string,firstName:string,lastName: string}, index:number) => {
                           return (
                             <UsersTableRow  
                             key={index}
                             id={user.id}
                             avatar={user.avatar}
                             email={user.email}
-                            first_name={user.first_name}  
-                            last_name={user.last_name}
+                            first_name={user.firstName}  
+                            last_name={user.lastName}
                             />
                           )
                         })}

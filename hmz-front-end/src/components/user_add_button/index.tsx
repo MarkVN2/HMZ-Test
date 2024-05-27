@@ -1,14 +1,22 @@
 import instance from "@/scripts/requests/instance";
+import { failureAlert, successAlert } from "@/scripts/utils/shared";
 import { Label, Modal, TextInput } from "flowbite-react";
 import { useState } from "react";
 
-const UserAddButton = () => {
+interface UserAddButtonProps {
+    className? : string;
+    title?:string
+    buttonTitle?:string
+}
 
-    const [user, setUser] = useState<{first_name: string, last_name: string, avatar: string, email: string}>({
+const UserAddButton = ({className = 'bg-[#f5f5f5] font-FiraSans size-fit ml-[65%] m-9 text-[#b1b1b1]  transition-all hover:scale-110 hover:bg-cyan-300 hover:text-black text-center p-2 px-7 ',title = 'ADICIONAR USÚARIO',buttonTitle = 'NOVO'} : UserAddButtonProps) => {
+
+    const [user, setUser] = useState<{first_name: string, last_name: string, avatar: string, email: string, password:string}>({
         first_name: '',
         last_name: '',
         avatar: '',
-        email: ''
+        email: '',
+        password:'',
     })
     const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -16,18 +24,23 @@ const UserAddButton = () => {
         setModalIsOpen(false);
     }
 
-    const handleSubmit = async () =>{
-        await instance.post('/users',{
-        first_name: user.first_name,
-        last_name: user.last_name,
+    const handleSubmit = async (e:React.FormEvent) =>{
+        e.preventDefault();
+        await instance.post('/register',{
+        firstName: user.first_name,
+        lastName: user.last_name,
         avatar: user.avatar,
-        email: user.email
+        email: user.email,
+        password: user.password
         }).then((response) => {
+            console.log(response)
             console.log(response.status)
             if (response.status === 201){
+            successAlert('Usuário adicionado com sucesso!')
             closeModal()
             }
         }).catch((error) => {
+            failureAlert('Erro ao adicionar usuário!')
             console.log(error)      
         })
     }
@@ -37,11 +50,11 @@ const UserAddButton = () => {
     }
 
     return (
-    <button className='bg-[#f5f5f5] font-FiraSans size-fit ml-[65%] m-9 text-[#b1b1b1]  transition-all hover:scale-110 hover:bg-cyan-300 hover:text-black text-center p-2 px-7' onClick={()=> setModalIsOpen(true)}>
+    <button className={ className} onClick={()=> setModalIsOpen(true)}>
             <Modal show={modalIsOpen} onClose={closeModal}  className="w-50 bg-black bg-opacity-30 " dismissible>
-                <p className='text-[#8b8b8b] font-FiraSans mt-5 ml-5'>ADICIONAR USÚARIO </p>
+                <p className='text-[#8b8b8b] font-FiraSans mt-5 ml-5'>{title} </p>
                 <Modal.Body>
-                        <form className='grid grid-flow-row  m-2 p-2'>
+                        <form className='grid grid-flow-row  m-2 p-2' onSubmit={handleSubmit}>
                             <div className="grid grid-flow-col">
                                 <div className="">
                                     <div className="mx-10 my-10">
@@ -56,6 +69,12 @@ const UserAddButton = () => {
                                             <TextInput id="last_name" type="text" name="last_name" onChange={handleChange} required/>
                                         </div>
                                     </div>
+                                    <div className="mx-10 my-10">
+                                        <Label htmlFor="password" value="SENHA" className="font-FiraSans text-[#b1b1b1]" />
+                                            <div className="border-2 rounded-sm ">    
+                                                <TextInput id="password" type="text" name="password" onChange={handleChange}  required/>
+                                            </div>
+                                    </div>
                                 </div>
                                 <div className="">
                                     <div className="mx-10 my-10">
@@ -67,7 +86,7 @@ const UserAddButton = () => {
                                     <div className="mx-10 my-10">
                                         <Label htmlFor="email" value="EMAIL" className="font-FiraSans text-[#b1b1b1]" />
                                             <div className="border-2 rounded-sm ">    
-                                                <TextInput id="email" type="text" name="email" onChange={handleChange}  required/>
+                                                <TextInput id="email" type="email" name="email" onChange={handleChange}  required/>
                                             </div>
                                     </div>
                                 </div>
@@ -75,7 +94,7 @@ const UserAddButton = () => {
                             <div className="grid grid-flow-col place-content-center">
                             <div className="">
                                 <button type="submit" className='  bg-[#f4f4f4] text-[#b1b1b1] hover:bg-green-400 hover:text-black p-3 px-12 hover:scale-110 transition-all font-FiraSans' 
-                                onSubmit={handleSubmit}>
+                               >
                                     SALVAR
                                 </button>
                             </div>
@@ -84,7 +103,7 @@ const UserAddButton = () => {
                  
                 </Modal.Body>
                 </Modal>
-                NOVO
+                {buttonTitle}
     </button>
     )
 }

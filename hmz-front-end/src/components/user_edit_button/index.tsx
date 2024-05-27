@@ -7,16 +7,17 @@ import { successAlert, warningAlert } from "@/scripts/utils/shared";
 
 const UserEditButton = ({id}:{id:number}) => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
-    const [user, setUser] = useState<{avatar: string, email: string, first_name:string, last_name:string}>({
+    const [user, setUser] = useState<{avatar: string, email: string, firstName:string, lastName:string}>({
         avatar: '',
         email: '',
-        first_name: '',
-        last_name: ''
+        firstName: '',
+        lastName: ''
     });
 
     const getData = async () => {
         const response = await instance.get(`/users/${id}`);
-        setUser(response.data.data);
+        console.log(response)
+        setUser(response.data);
     }
     const closeModal = () => {
         setModalIsOpen(false);
@@ -35,8 +36,8 @@ const UserEditButton = ({id}:{id:number}) => {
         instance.put(`/users/${id}`,{
             avatar: user.avatar,
             email: user.email,
-            first_name: user.first_name,
-            last_name: user.last_name
+            firstName: user.firstName,
+            lastName: user.lastName
         }).then((response) => {
             console.log(response.status)
             successAlert('Usuário editado com sucesso!')
@@ -49,11 +50,10 @@ const UserEditButton = ({id}:{id:number}) => {
         const { name, value } = e.target;
         setUser({ ...user, [name]: value });
     }
+
     useEffect(() => {
-        if(modalIsOpen){
-            getData()
-        }
-    });
+        getData()
+    },[]);
     return(
         <Table.Cell className="cursor-pointer" onClick={()=>setModalIsOpen(true)}>
             <EditIcon/>
@@ -67,13 +67,13 @@ const UserEditButton = ({id}:{id:number}) => {
                                     <div className="mx-10 my-10">
                                     <Label htmlFor="first_name" value="NOME" className="font-FiraSans text-[#b1b1b1]" />
                                         <div className="border-2 rounded-sm ">
-                                            <TextInput id="first_name" type="text" name="first_name" value={user.first_name} onChange={handleChange} required/>
+                                            <TextInput id="first_name" type="text" name="firstName" value={user.firstName} onChange={handleChange} required/>
                                         </div> 
                                     </div>
                                     <div className="mx-10 my-10">
                                     <Label htmlFor="last_name" value="SOBRENOME" className="font-FiraSans text-[#b1b1b1]" />    
                                         <div className="border-2 rounded-sm ">
-                                            <TextInput id="last_name" type="text" name="last_name" value={user.last_name}  onChange={handleChange} required/>
+                                            <TextInput id="last_name" type="text" name="lastName" value={user.lastName}  onChange={handleChange} required/>
                                         </div>
                                     </div>
                                 </div>
